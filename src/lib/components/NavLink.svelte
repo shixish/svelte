@@ -20,8 +20,10 @@
 	href={resolve(...to)}
 	aria-current={active ? 'page' : undefined}
 	class={[
-		'transition-colors hover:text-stone-100',
-		active ? 'font-medium text-stone-100' : 'text-stone-400'
+		'transition-colors hover:text-stone-900 dark:hover:text-stone-100',
+		active
+			? 'font-medium text-stone-900 dark:text-stone-100'
+			: 'text-stone-500 dark:text-stone-400'
 	]}
 >
 	{@render children()}

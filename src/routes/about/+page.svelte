@@ -2,7 +2,7 @@
 	<title>About · Lorem Blog</title>
 </svelte:head>
 
-<div class="prose prose-stone prose-lg prose-invert max-w-none">
+<div class="prose prose-stone prose-lg dark:prose-invert max-w-none">
 	<h1>About</h1>
 	<p class="lead">
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut

@@ -14,12 +14,17 @@
 </svelte:head>
 
 <article>
-	<a href={resolve('/')} class="text-sm text-stone-400 hover:text-stone-100">&larr; All posts</a>
+	<a
+		href={resolve('/')}
+		class="text-sm text-stone-500 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100"
+	>
+		&larr; All posts
+	</a>
 
 	<header class="mt-6 mb-10">
 		<h1 class="text-4xl font-bold tracking-tight">{post.title}</h1>
 		<div class="mt-4 flex items-center gap-2 text-sm text-stone-500">
-			<span class="font-medium text-stone-300">{post.author}</span>
+			<span class="font-medium text-stone-700 dark:text-stone-300">{post.author}</span>
 			<span aria-hidden="true">&middot;</span>
 			<time datetime={post.date}>{formatDate(post.date)}</time>
 			<span aria-hidden="true">&middot;</span>
@@ -27,7 +32,7 @@
 		</div>
 	</header>
 
-	<div class="prose prose-stone prose-lg prose-invert max-w-none">
+	<div class="prose prose-stone prose-lg dark:prose-invert max-w-none">
 		<p class="lead">{post.excerpt}</p>
 		{#each post.body as paragraph, i (i)}
 			<PostParagraph

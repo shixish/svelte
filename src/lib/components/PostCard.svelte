@@ -17,11 +17,14 @@
 		<span>{post.readingTime} min read</span>
 	</div>
 	<h2 class="mt-2 text-2xl font-semibold tracking-tight">
-		<a href={resolve('/posts/[slug]', { slug: post.slug })} class="hover:text-stone-300">
+		<a
+			href={resolve('/posts/[slug]', { slug: post.slug })}
+			class="hover:text-stone-600 dark:hover:text-stone-300"
+		>
 			{post.title}
 		</a>
 	</h2>
-	<p class="mt-2 text-stone-400">{post.excerpt}</p>
+	<p class="mt-2 text-stone-600 dark:text-stone-400">{post.excerpt}</p>
 	<ul class="mt-4 flex gap-2">
 		{#each post.tags as tag (tag)}
 			<Tag label={tag} />

@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 
-:root {
-	color-scheme: dark;
-}
+@custom-variant dark (&:where(.dark, .dark *));
+
+@custom-variant theme-selected (&:is([data-theme='light'] [data-option='light'], [data-theme='dark'] [data-option='dark'], [data-theme='system'] [data-option='system']));
