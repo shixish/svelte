@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { ComponentProps } from 'svelte';
 	import './layout.css';
 	import favicon from '#lib/assets/favicon.svg';
 	import { resolve } from '$app/paths';
@@ -11,10 +12,12 @@
 
 	setSettings(new Settings());
 
-	const links = [
-		{ route: '/', label: 'Blog' },
-		{ route: '/about', label: 'About' }
-	] as const;
+	const links: { to: ComponentProps<typeof NavLink>['to']; label: string }[] = [
+		{ to: ['/(blog)'], label: 'Blog' },
+		{ to: ['/(blog)/archive/[[year=year]]', {}], label: 'Archive' },
+		{ to: ['/about'], label: 'About' },
+		{ to: ['/contact'], label: 'Contact' }
+	];
 </script>
 
 <svelte:head>
@@ -29,11 +32,11 @@
 		class="border-b border-stone-200 bg-white/80 backdrop-blur dark:border-stone-800 dark:bg-stone-950/80"
 	>
 		<div class="mx-auto flex max-w-3xl items-center justify-between gap-6 px-6 py-4">
-			<a href={resolve('/')} class="text-lg font-semibold tracking-tight">Lorem Blog</a>
+			<a href={resolve('/(blog)')} class="text-lg font-semibold tracking-tight">Lorem Blog</a>
 			<div class="flex items-center gap-6">
 				<nav class="flex gap-6 text-sm">
-					{#each links as link (link.route)}
-						<NavLink to={[link.route]}>{link.label}</NavLink>
+					{#each links as link (link.label)}
+						<NavLink to={link.to}>{link.label}</NavLink>
 					{/each}
 				</nav>
 				<ThemeToggle />
@@ -50,7 +53,10 @@
 			class="mx-auto flex max-w-3xl items-center justify-between px-6 py-6 text-sm text-stone-500 dark:text-stone-400"
 		>
 			<p>&copy; {new Date().getFullYear()} Lorem Blog</p>
-			<p>Built with SvelteKit</p>
+			<p>
+				Built with SvelteKit &middot;
+				<a href={resolve('/rss.xml')} class="hover:text-stone-900 dark:hover:text-stone-100">RSS</a>
+			</p>
 		</div>
 	</footer>
 </div>

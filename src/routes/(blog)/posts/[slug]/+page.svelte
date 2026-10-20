@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { invalidate } from '$app/navigation';
 	import { resolve } from '$app/paths';
 	import { formatDate } from '#lib/posts.ts';
 	import PostParagraph from '#lib/components/PostParagraph.svelte';
@@ -15,7 +16,7 @@
 
 <article>
 	<a
-		href={resolve('/')}
+		href={resolve('/(blog)')}
 		class="text-sm text-stone-500 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100"
 	>
 		&larr; All posts
@@ -45,3 +46,35 @@
 		{/each}
 	</div>
 </article>
+
+<aside class="mt-16 border-t border-stone-200 pt-8 dark:border-stone-800">
+	<div class="flex items-center justify-between">
+		<h2 class="text-sm font-semibold tracking-wide text-stone-500 uppercase dark:text-stone-400">
+			Related posts
+		</h2>
+		<button
+			onclick={() => invalidate('app:related')}
+			class="text-sm text-stone-500 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100"
+		>
+			Refresh
+		</button>
+	</div>
+	{#await data.related}
+		<p class="mt-4 text-sm text-stone-500 dark:text-stone-400">Loading related posts…</p>
+	{:then related}
+		<ul class="mt-4 space-y-2">
+			{#each related as other (other.slug)}
+				<li>
+					<a
+						href={resolve('/(blog)/posts/[slug]', { slug: other.slug })}
+						class="font-medium hover:text-stone-600 dark:hover:text-stone-300"
+					>
+						{other.title}
+					</a>
+				</li>
+			{/each}
+		</ul>
+	{:catch}
+		<p class="mt-4 text-sm text-red-600 dark:text-red-400">Couldn't load related posts.</p>
+	{/await}
+</aside>

@@ -18,7 +18,7 @@
 	</div>
 	<h2 class="mt-2 text-2xl font-semibold tracking-tight">
 		<a
-			href={resolve('/posts/[slug]', { slug: post.slug })}
+			href={resolve('/(blog)/posts/[slug]', { slug: post.slug })}
 			class="hover:text-stone-600 dark:hover:text-stone-300"
 		>
 			{post.title}

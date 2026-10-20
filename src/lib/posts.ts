@@ -56,7 +56,7 @@ export const posts: Post[] = [
 		title: 'Ut labore et dolore magna aliqua',
 		excerpt:
 			'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-		date: '2026-08-30',
+		date: '2025-11-30',
 		author: 'John Smith',
 		tags: ['engineering', 'notes'],
 		readingTime: 5,
@@ -64,8 +64,20 @@ export const posts: Post[] = [
 	}
 ];
 
+export const tags = [...new Set(posts.flatMap((post) => post.tags))].sort();
+
+export const years = [...new Set(posts.map((post) => post.date.slice(0, 4)))].sort().reverse();
+
 export function getPost(slug: string): Post | undefined {
 	return posts.find((post) => post.slug === slug);
+}
+
+export async function getRelatedPosts(post: Post): Promise<Post[]> {
+	// Stands in for a slow data source so the pending state is visible.
+	await new Promise((resolve) => setTimeout(resolve, 1000));
+	return posts
+		.filter((other) => other.slug !== post.slug && other.tags.some((tag) => post.tags.includes(tag)))
+		.slice(0, 2);
 }
 
 export function formatDate(date: string): string {

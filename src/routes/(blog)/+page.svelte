@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { posts } from '#lib/posts.ts';
-	import PostCard from '#lib/components/PostCard.svelte';
+	import PostList from '#lib/components/PostList.svelte';
 </script>
 
 <section class="mb-12">
@@ -11,10 +11,4 @@
 	</p>
 </section>
 
-<ul class="divide-y divide-stone-200 dark:divide-stone-800">
-	{#each posts as post (post.slug)}
-		<li class="py-8 first:pt-0">
-			<PostCard {post} />
-		</li>
-	{/each}
-</ul>
+<PostList {posts} />

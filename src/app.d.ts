@@ -1,5 +1,7 @@
 // See https://svelte.dev/docs/kit/types#app.d.ts
 // for information about these interfaces
+import type { PageData as TagPageData } from './routes/(blog)/tags/[tag=tag]/$types';
+
 declare global {
 	namespace App {
 		interface Platform {
@@ -12,7 +14,9 @@ declare global {
 		// interface Error {}
 		// interface Locals {}
 		// interface PageData {}
-		// interface PageState {}
+		interface PageState {
+			tagPreview?: TagPageData;
+		}
 	}
 }
 
